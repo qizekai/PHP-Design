@@ -16,18 +16,18 @@
 * [图片模式](#pic)
 
 
-##<a name="line"/>
-单例模式
-##<a name="title"/>
-工厂模式
-##<a name="text"/>显示文本
-注册树模式
+##<a name="line"/>单例模式
 
-##<a name="link"/>文字链接
-各种模式
+##<a name="title"/>工厂模式
 
-##<a name="pic"/>显示图片
-图片模式
+##<a name="text"/>注册树模式
 
-##<a name="dot"/>列表
-观察者模式
+
+##<a name="link"/>各种模式
+
+
+##<a name="pic"/>图片模式
+
+
+##<a name="dot"/>观察者模式
+

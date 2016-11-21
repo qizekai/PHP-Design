@@ -51,7 +51,46 @@ class DB
 
 
 ##<a name="title"/>工厂模式
-
+####介绍：
+            工厂模式：说白了就是使用统一方法（工厂方法）来实例化对象，我们定义一个专门用来创建其它对象的类。 这样在需要调用某个类的时候，<br/>我们就不需要去使用new关键字实例化这个类，而是通过我们的工厂类调用某个方法得到类的实例。
+            工厂模式通常用来返回符合类似接口的不同的类，工厂的一种常见用法就是创建多态的提供者，从而允许我们基于应用程序逻辑或者配置设置来决定应实例化哪一个类，例如，可以使用这样的提供者来扩展一个类，而不需要重构应用程序的其他部分，从而使用新的扩展后的名称 。
+            通常，工厂模式有一个关键的构造，根据一般原则命名为Factory的静态方法，然而这只是一种原则，工厂方法可以任意命名，这个静态还可以接受任意数据的参数，必须返回一个对象。当我们对象所对应的类的类名发生变化的时候，我们只需要改一下工厂类类里面的实例化方法即可。不需要外部改所有的地方，如果是更改参数，那么又得另外一种说法了    
+####代码（Factory文件夹内）：
+```php
+index.php                       //单一入口
+<?php
+$a=Database::getInstance();    //直接调用数据库静态化方法
+$db=Factory::createDatabase();  //使用工厂模式，来实例化数据库
+Database.php                    //数据库类
+<?php
+class Database
+{
+	static protected $db;
+	private function __construct()
+	{
+	}
+	static function getInstance()
+	{
+		if(self::$db){
+			return slef::$db;
+		}else{
+			self::$db=new self();
+			return self::$db;
+		}
+	}
+}
+Factory.php              /工厂模式类
+<?php
+namespace IMooc;
+class Factory
+{
+	static function createDatabase()
+	{
+		$db=Database::getinstance();
+		return $db;
+	}
+}
+```
 ##<a name="text"/>注册树模式
 
 ##<a name="link"/>各种模式

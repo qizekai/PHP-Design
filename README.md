@@ -15,13 +15,11 @@
 * [各种模式](#link)
 * [图片模式](#pic)
 
-
 ##<a name="line"/>单例模式
 
 ##<a name="title"/>工厂模式
 
 ##<a name="text"/>注册树模式
-
 
 ##<a name="link"/>各种模式
 

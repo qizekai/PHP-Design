@@ -31,13 +31,14 @@
       1、主要在于数据库应用, 一个应用中会存在大量的数据库操作, 使用单例模式,则可以避免大量的new 操作消耗的资源。
       2、如果系统中需要有一个类来全局控制某些配置信息, 那么使用单例模式可以很方便的实现。
       3、在一次页面请求中, 便于进行调试, 因为所有的代码(例如数据库操作类db)都集中在一个类中。
+      4、在众多的数据库连接接口中，只会创建一次，而不会多次创建.
 ####代码（Singleton文件夹内）：
 ```php
 <?php  
   
 class DB    
 {    
-    private static $_instance;        
+    private static $_instance;            
     private function __construct()            //防止被扩展和外部实例化
     {        
     }    
@@ -101,7 +102,36 @@ class Factory
 }
 ```
 ##<a name="text"/>注册树模式
+####介绍:
+	单例模式解决的是如何在整个项目中创建唯一对象实例的问题，工厂模式解决的是如何不通过new建立实例对象的方法。 那么注册树模式想解决什么问题呢？ 在考虑这个问题前，我们还是有必要考虑下前两种模式目前面临的局限。  首先，单例模式创建唯一对象的过程本身还有一种判断，即判断对象是否存在。存在则返回对象，不存在则创建对象并返回。 每次创建实例对象都要存在这么一层判断。 工厂模式更多考虑的是扩展维护的问题。 总的来说，单例模式和工厂模式可以产生更加合理的对象。怎么方便调用这些对象呢？而且在项目内如此建立的对象好像散兵游勇一样，不便统筹管理安排啊。因 而，注册树模式应运而生。不管你是通过单例模式还是工厂模式还是二者结合生成的对象，都统统给我“插到”注册树上。我用某个对象的时候，直接从注册树上取 一下就好。这和我们使用全局变量一样的方便实用。 而且注册树模式还为其他模式提供了一种非常好的想法。
+	
+####代码:
+<?php
+namespace IMooc;
 
+class Register
+{
+    protected static $objects;
+
+    static function set($alias, $object)
+    {
+        self::$objects[$alias] = $object;
+    }
+
+    static function get($key)
+    {
+        if (!isset(self::$objects[$key]))
+        {
+            return false;
+        }
+        return self::$objects[$key];
+    }
+
+    function _unset($alias)
+    {
+        unset(self::$objects[$alias]);
+    }
+}
 ##<a name="link"/>各种模式
 
 

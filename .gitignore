@@ -1,0 +1,7 @@
+*.[oa]
+*~
+*.pyc
+haha
+!test.py
+foo/
+**/res
